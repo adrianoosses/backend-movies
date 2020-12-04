@@ -13,7 +13,7 @@ let or = require('./components/order/router.js');
 let bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
-const MongoURI = process.env.MongoURI || 'mongodb://localhost:27017/db-back-movies';
+const MongoURI = process.env.MongoURI || 'mongodb://localhost:27017/db-movieService';
 mongoose.connect(MongoURI, {
 useNewUrlParser: true,
 useUnifiedTopology: true,
