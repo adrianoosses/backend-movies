@@ -94,7 +94,7 @@ exports.login = async(req, res) =>{
             res.json({"msg":"Logged"});
             resul = true;
         } else{
-            res.json({"error":"Wrong user or password "});
+            res.status(400).json({"error":"Wrong user or password "});
             return false;
         }
     }catch{
