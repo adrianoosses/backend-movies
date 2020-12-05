@@ -1,15 +1,28 @@
-const us = require('./service.js');
+//const us = require('./service.js');
+let claveToken = "fdfdkjfd.sa#fjpdfjkl";
+let jwt = require('jsonwebtoken');
 
 exports.auth = (req, res, next) => {
-    //console.log("TOKEN auth: " + us.generateToken(req.body));
+    let {email} = req.query;
     const token = req.headers.authorization;
-    //console.log("token"+token);
-    if(!token) return res.json({error:"Error: token doesn't exist"});
-    else if(us.decodeToken(token)){ 
-        //console.log("us.decodeToken(token) "+us.decodeToken(token));
+    console.log("token: " + token);
+    //Option 2: access to moongose db
+
+    try{
+        jwt.verify(token, claveToken);
         next();
+    }catch{
+        res.status(400).json({"error":"token error"})
+        console.log("Error");
     }
-    else console.log("ERROR token");
+    
+    /*
+    else if((await tokenDb)[0].token === token){ 
+        next();
+    } else{
+         console.log("Unathorized");
+         res.json({error:"Unauthorized."})
+    }*/
 }
 
 exports.isAdmin = (req, res, next) => {

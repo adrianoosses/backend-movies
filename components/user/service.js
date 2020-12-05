@@ -102,6 +102,18 @@ exports.login = async(req, res) =>{
         if(usrLoginString && usrLoginString.pass === password){
             console.log("usrLoginString",usrLoginString.email );
             token = generateToken(usrLoginString);
+            
+            /*
+            let conditions = { email: usrLoginString.email }
+                , update = { token: token }
+                , options = { multi: true };
+            console.log("Sale2");
+            user.update(conditions, update, options, function(err, doc) {
+                if (err) return res.send(500, {error: err});
+                return res.send('Succesfully saved.');
+            });
+            */
+
             console.log("Correct user. LOOGED");
             res.json({"msg":"Logged",
                     "token": token});
