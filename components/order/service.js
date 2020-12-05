@@ -46,7 +46,7 @@ exports.addOrder = async (req, res) =>{
         res.json({"msg":"Added"})
         return true;
     }else{
-        res.json({"msg":"Not added"})
+        res.json({"msg":"Not added: user has another movie already"})
         return false;
     }
 } 
