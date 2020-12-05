@@ -15,7 +15,7 @@ router.post('/', addUser);
 
 // Endpoint de Perfil (R)read -> GET
 router.get('/', getUsers);
-router.get('/profile', getProfile);
+router.get('/profile', auth, getProfile);
 router.put('/', changeUser);
 
 // Endpoint de Baja de usuario (D) -> DELETE
