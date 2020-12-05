@@ -84,14 +84,27 @@ exports.addUser = async (req, res) =>{
     return true;
 };
 
+let generateToken = (user)=>{
+    console.log("generating token");
+    console.log("user", user);
+    let newUser = {
+        email: user.email
+    }
+    console.log("email: " + newUser.email);
+    return jwt.sign(newUser, claveToken, {expiresIn: 60 * 60 * 24})
+}
+
 exports.login = async(req, res) =>{
     try{
         let password = req.body.password;
         let usrLoginString = await getUsersByBody(req, res);
         console.log("usrLoginString", usrLoginString);
         if(usrLoginString && usrLoginString.pass === password){
-            console.log("Correct user and token. LOOGED");
-            res.json({"msg":"Logged"});
+            console.log("usrLoginString",usrLoginString.email );
+            token = generateToken(usrLoginString);
+            console.log("Correct user. LOOGED");
+            res.json({"msg":"Logged",
+                    "token": token});
             resul = true;
         } else{
             res.status(400).json({"error":"Wrong user or password "});
