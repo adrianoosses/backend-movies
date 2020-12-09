@@ -49,6 +49,7 @@ exports.getProfile = async(req, res) => {
         return true;
     }catch{
         res.status(400).json({"Error":user});
+        next(e);
         return false;
     }
     
